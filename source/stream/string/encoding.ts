@@ -1,0 +1,1 @@
+export type StringEncoding = "utf-8" | "ascii"
