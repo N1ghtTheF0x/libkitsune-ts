@@ -1,0 +1,10 @@
+{
+    "include": ["source"],
+    "exclude": ["node_modules"],
+    "files": ["test.ts"],
+    "compilerOptions": {
+        "module": "CommonJS",
+        "strict": true,
+        "lib": ["ESNext"]
+    }
+}

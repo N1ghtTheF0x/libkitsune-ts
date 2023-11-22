@@ -1,0 +1,16 @@
+{
+  "name": "libkitsune-ts",
+  "version": "1.0.0",
+  "description": "Some common code for my TypeScript projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -r ts-node/register test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "latest",
+    "ts-node": "latest"
+  }
+}
