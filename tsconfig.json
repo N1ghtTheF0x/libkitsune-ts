@@ -5,6 +5,8 @@
     "compilerOptions": {
         "module": "CommonJS",
         "strict": true,
-        "types": ["node"]
+        "types": ["node"],
+        "lib": ["ESNext"],
+        "target": "ESNext"
     }
 }

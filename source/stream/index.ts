@@ -13,7 +13,17 @@ export interface IByteOrderStream
     byteOrder: ByteOrder
 }
 
-export interface IInputStream extends IOffsetStream, IByteOrderStream
+export interface IFixedStream
+{
+    readonly length: number
+}
+
+export interface IDynamicStream
+{
+    readonly readable: boolean
+}
+
+export interface IInputStreamBase
 {
     readInt8(): sint8
     readInt16(): sint16
@@ -25,13 +35,20 @@ export interface IInputStream extends IOffsetStream, IByteOrderStream
     readUInt64(): uint64
     readFloat(): float
     readDouble(): double
-    readString(reader: IStringReader): string
-    readString(encoding: StringEncoding): string
+    readString(length: number): string
+    readString(length: number,encoding: StringEncoding): string
+    readString(length: number,reader: IStringReader): string
     readArrayBuffer(length: number): ArrayBuffer
-    readDataView(length: number): DataView
+    readDataView(length: number,byteOffset?: number , byteLength?: number): DataView
+    [Symbol.iterator](): Generator<uint8>
 }
 
-export interface IOutputStream extends IOffsetStream, IByteOrderStream
+export interface IInputStream extends IInputStreamBase, IOffsetStream, IByteOrderStream
+{
+    get [Symbol.toStringTag](): "InputStream"
+}
+
+export interface IOutputStreamBase
 {
     writeInt8(value: sint8): this
     writeInt16(value: sint16): this
@@ -48,10 +65,19 @@ export interface IOutputStream extends IOffsetStream, IByteOrderStream
     writeString(string: string,writer: IStringWriter): this
     writeArrayBuffer(buffer: ArrayBufferLike): this
     writeDataView(view: DataView): this
-    
 }
 
-export interface IInputOutputStream extends IInputStream, IOutputStream
+export interface IOutputStream extends IOutputStreamBase, IOffsetStream, IByteOrderStream
 {
-
+    get [Symbol.toStringTag](): "OutputStream"
 }
+
+export interface IInputOutputStream extends IInputStreamBase, IOutputStreamBase, IByteOrderStream
+{
+    readOffset: number
+    writeOffset: number
+    get [Symbol.toStringTag](): "InputOutputStream"
+}
+
+export type InputStreamLike = IInputStream | IInputOutputStream
+export type OutputStreamLike = IOutputStream | IInputOutputStream
