@@ -4,11 +4,15 @@
   "description": "Some common code for my TypeScript projects",
   "main": "index.js",
   "scripts": {
-    "test": "node -r ts-node/register test.ts"
+    "build:nodejs": "tsc -b nodejs/tsconfig.json",
+    "build:browser": "tsc -b ./browser/tsconfig.json",
+    "build": "npm run build:nodejs && npm run build:browser",
+    "clean:cjs": "rm -rf cjs",
+    "clean:esm": "rm -rf esm"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "N1ghtTheF0x",
+  "license": "NTF",
   "devDependencies": {
     "typescript": "latest",
     "ts-node": "latest",

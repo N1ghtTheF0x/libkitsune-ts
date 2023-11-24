@@ -1,2 +1,8 @@
 node_modules
-dist
+cjs
+esm
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
+tsconfig.tsbuildinfo

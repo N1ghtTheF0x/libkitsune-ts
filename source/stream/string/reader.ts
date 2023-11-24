@@ -1,4 +1,4 @@
-import { InputStreamLike } from ".."
+import { InputStreamLike } from "../types"
 import { StringEncoding } from "./encoding"
 
 export type IStringReader = (stream: InputStreamLike,length: number) => string

@@ -1,8 +1,8 @@
 import { Readable } from "node:stream"
-import { IDynamicStream, IInputStream } from "."
-import { ByteOrder, double, float, sint16, sint32, sint64, sint8, uint16, uint32, uint64, uint8 } from "../types"
-import { StringEncoding } from "./string/encoding"
-import { IStringReader, string_readers } from "./string/reader"
+import { IDynamicStream, IInputStream } from "../source/stream/types"
+import { ByteOrder, double, float, sint16, sint32, sint64, sint8, uint16, uint32, uint64, uint8 } from "../source/types/number"
+import { StringEncoding } from "../source/stream/string/encoding"
+import { IStringReader, string_readers } from "../source/stream/string/reader"
 
 function read(stream: Readable,size: number)
 {

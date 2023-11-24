@@ -1,5 +1,5 @@
-import { IFixedStream, IInputOutputStream } from "."
-import { ByteOrder, double, float, sint16, sint32, sint64, sint8, uint16, uint32, uint64, uint8 } from "../types"
+import { IFixedStream, IInputOutputStream } from "./types"
+import { ByteOrder, double, float, sint16, sint32, sint64, sint8, uint16, uint32, uint64, uint8 } from "../types/number"
 import { StringEncoding } from "./string/encoding"
 import { IStringReader, string_readers } from "./string/reader"
 import { IStringWriter, string_writers } from "./string/writer"

@@ -1,12 +1,13 @@
 {
+    "exclude": ["node_modules","dist","nodejs","browser"],
     "include": ["source"],
-    "exclude": ["node_modules"],
-    "files": ["test.ts"],
     "compilerOptions": {
         "module": "CommonJS",
         "strict": true,
-        "types": ["node"],
         "lib": ["ESNext"],
-        "target": "ESNext"
+        "target": "ESNext",
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true
     }
 }

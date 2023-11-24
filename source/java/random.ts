@@ -1,4 +1,4 @@
-import { double, float, sint32, sint64 } from "./types"
+import { double, float, sint32, sint64 } from "../types/number"
 
 export interface IRandom
 {
