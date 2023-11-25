@@ -1,14 +1,18 @@
 {
-  "name": "libkitsune-ts",
+  "name": "@ntf/libkitsune-ts",
   "version": "1.0.0",
   "description": "Some common code for my TypeScript projects",
-  "main": "index.js",
+  "main": "./dist/nodejs.js",
+  "module": "./esm/browser.js",
   "scripts": {
     "build:nodejs": "tsc -b nodejs/tsconfig.json",
     "build:browser": "tsc -b ./browser/tsconfig.json",
     "build": "npm run build:nodejs && npm run build:browser",
     "clean:cjs": "rm -rf cjs",
-    "clean:esm": "rm -rf esm"
+    "clean:esm": "rm -rf esm",
+    "clean": "npm run clean:cjs && npm run clean:esm",
+    "fix-esm": "fix-esm-import-path ./esm/browser.js",
+    "prebuild:browser": "npm run fix-esm"
   },
   "keywords": [],
   "author": "N1ghtTheF0x",
@@ -16,6 +20,14 @@
   "devDependencies": {
     "typescript": "latest",
     "ts-node": "latest",
-    "@types/node": "latest"
-  }
+    "@types/node": "latest",
+    "fix-esm-import-path": "latest"
+  },
+  "exports": {
+    "import": "./esm/browser.js",
+    "node": "./cjs/nodejs.js",
+    "require": "./cjs/nodejs.js"
+  },
+  "browser": "./esm/browser.js",
+  "files": []
 }

@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules","dist","nodejs","browser"],
+    "exclude": ["node_modules","dist","nodejs","browser","tests"],
     "include": ["source"],
     "compilerOptions": {
         "module": "CommonJS",

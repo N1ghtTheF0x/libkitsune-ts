@@ -1,7 +1,8 @@
 {
     "extends": "../tsconfig.esm.json",
-    "files": ["index.ts","error.ts"],
+    "files": ["../browser.ts","index.ts","error.ts"],
     "compilerOptions": {
-        "lib": ["ESNext","DOM"]
+        "lib": ["ESNext","DOM"],
+        "moduleResolution": "Bundler"
     }
 }

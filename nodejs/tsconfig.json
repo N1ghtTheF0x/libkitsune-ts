@@ -1,8 +1,10 @@
 {
     "extends": "../tsconfig.cjs.json",
-    "files": ["index.ts","stream.ts"],
+    "files": ["../nodejs.ts","index.ts","stream.ts"],
     "compilerOptions": {
         "types": ["node"],
-        "lib": ["ESNext"]
+        "lib": ["ESNext"],
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext"
     }
 }

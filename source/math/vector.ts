@@ -157,7 +157,24 @@ export interface IVector3 extends IVector2
 
 export interface IVector3Base<V extends IVector3> extends IVector3
 {
-
+    add(x: number,y: number,z: number): V
+    add(vector: IVector3): V
+    subtract(x: number,y: number,z: number): V
+    subtract(vector: IVector3): V
+    offset(x: number,y: number,z: number): this
+    offset(vector: IVector3): this
+    length(): number
+    normalize(): this
+    multiply(x: number): this
+    multiply(x: number,y: number,z: number): number
+    multiply(vector: IVector3): number
+    cross(x: number,y: number,z: number): Vector3
+    cross(vector: IVector3): Vector3
+    distance(x: number,y: number,z: number,sqrt?: boolean): number
+    distance(vector: IVector3,sqrt?: boolean): number
+    toJSON(): IVector3
+    toArray(): IVector3Array
+    toString(): IVector3String
 }
 
 export type IVector3Array = [...IVector2Array,number]
@@ -182,5 +199,110 @@ export class Vector3 implements IVector3Base<Vector3>
     public constructor(public x: number = 0,public y: number = 0,public z: number = 0)
     {
 
+    }
+    cross(x: number, y: number, z: number): Vector3
+    cross(vector: IVector3): Vector3
+    cross(x: IVector3 | number, y?: number, z?: number): Vector3
+    {
+        if(typeof x == "number" && typeof y == "number" && typeof z == "number")
+            return new Vector3(this.y*z - this.z*y,this.z*x - this.x*z,this.x*y - this.y*x)
+        if(Vector3.is(x))
+            return new Vector3(this.y*x.z - this.z*x.y,this.z*x.x - this.x*x.z,this.x*x.y - this.y*x.x)
+        throw new Error()
+    }
+    add(x: number, y: number, z: number): Vector3
+    add(vector: IVector3): Vector3
+    add(x: IVector3 | number, y?: number, z?: number): Vector3
+    {
+        if(typeof x == "number" && typeof y == "number" && typeof z == "number")
+            return new Vector3(this.x + x,this.y + y,this.z + this.z)
+        if(Vector3.is(x))
+            return new Vector3(this.x + x.x,this.y + x.y,this.z + x.z)
+        throw new Error()
+    }
+    subtract(x: number, y: number, z: number): Vector3
+    subtract(vector: IVector3): Vector3
+    subtract(x: IVector3 | number, y?: number, z?: number): Vector3
+    {
+        if(typeof x == "number" && typeof y == "number" && typeof z == "number")
+            return new Vector3(this.x - x,this.y - y,this.z - this.z)
+        if(Vector3.is(x))
+            return new Vector3(this.x - x.x,this.y - x.y,this.z - x.z)
+        throw new Error()
+    }
+    offset(x: number, y: number, z: number): this
+    offset(vector: IVector3): this
+    offset(x: IVector3 | number, y?: number, z?: number): this
+    {
+        if(typeof x == "number" && typeof y == "number" && typeof z == "number")
+        {
+            this.x += x,this.y += y,this.z += z
+            return this
+        }
+        if(Vector3.is(x))
+        {
+            this.x += x.x,this.y += x.y,this.z += x.z
+            return this
+        }
+        throw new Error()
+    }
+    length(): number
+    {
+        return Math.sqrt(this.x*this.x+this.y*this.y+this.z*this.z)
+    }
+    normalize(): this
+    {
+        const w = this.length()
+        if(w != 0)
+            this.x /= w,this.y /= w,this.z /= w
+        return this
+    }
+    multiply(x: number): this
+    multiply(x: number, y: number, z: number): number
+    multiply(vector: IVector3): number
+    multiply(x: IVector3 | number, y?: number, z?: number): number | this
+    {
+        if(typeof x == "number")
+        {
+            if(typeof y == "number" && typeof z == "number")
+                return Math.sqrt(this.x*x+this.y*y+this.z*z)
+            this.x *= x,this.y *= x,this.z *= x
+            return this
+        }
+        if(Vector3.is(x))
+            return Math.sqrt(this.x*x.x+this.y*x.y+this.z*x.z)
+        throw new Error()
+    }
+    distance(x: number, y: number, z: number, sqrt?: boolean | undefined): number
+    distance(vector: IVector3, sqrt?: boolean | undefined): number
+    distance(x: IVector3 | number, y: number | boolean = true, z?: number, sqrt: boolean = true): number
+    {
+        if(typeof x == "number" && typeof y == "number" && typeof z == "number")
+        {
+            const result = Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) + Math.pow(z - this.z,2)
+            return z ? Math.sqrt(result) : result
+        }
+        if(Vector3.is(x) && typeof y == "boolean")
+        {
+            const result = Math.pow(x.x - this.x, 2) + Math.pow(x.y - this.y, 2) + Math.pow(x.z - this.z,2)
+            return y ? Math.sqrt(result) : result
+        }
+        throw new Error()
+    }
+    toJSON(): IVector3
+    {
+        return {
+            x: this.x,
+            y: this.y,
+            z: this.z
+        }
+    }
+    toArray(): IVector3Array
+    {
+        return [this.x,this.y,this.z]
+    }
+    toString(): IVector3String
+    {
+        return `(${this.x},${this.y},${this.z})`
     }
 }
